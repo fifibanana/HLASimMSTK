@@ -346,8 +346,8 @@ public class KolejkaFederate
 		//get count parameter for GetClients Interaction
 		countHandle = rtiamb.getParameterHandle(rtiamb.getInteractionClassHandle( "HLAinteractionRoot.GetClients" ), "count");
 
-		//get numberOfClients parameter for AddClients Interaction
-		numberOfClientsHandle = rtiamb.getParameterHandle(rtiamb.getInteractionClassHandle( "HLAinteractionRoot.AddClients" ), "numberOfClients");
+		//get numberOfProducts parameter for AddClients Interaction
+		numberOfClientsHandle = rtiamb.getParameterHandle(rtiamb.getInteractionClassHandle( "HLAinteractionRoot.AddClients" ), "numberOfProducts");
 
 		numberOfProductsHandle = rtiamb.getParameterHandle(rtiamb.getInteractionClassHandle( "HLAinteractionRoot.AddProductsForClient" ), "numberOfProductsForA");
 

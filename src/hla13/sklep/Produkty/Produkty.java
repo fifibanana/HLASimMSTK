@@ -1,21 +1,25 @@
 package hla13.sklep.Produkty;
 
+import hla13.sklep.sim.random.SimGenerator;
+
 import java.util.Random;
 
 
 public class Produkty {
     int timeToNext;
     private Random random;
+    private SimGenerator generator;
 
     public Produkty() {
         random = new Random();
         timeToNext = generateTimeToNext();
+        generator = new SimGenerator();
     }
 
     public int produce()
     {
         timeToNext=generateTimeToNext();
-        int count = random.nextInt(10)+1;
+        int count = (int) generator.poisson(3.5);
        // int count2 = random.nextInt(2)+1;
        // List listOfCount = new ArrayList<>();
        // listOfCount.add(count);

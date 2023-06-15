@@ -81,7 +81,7 @@
 				<transportation>HLAbestEffort</transportation>
 				<order>Receive</order>
 				<parameter>
-					<name>numberOfClients</name>
+					<name>numberOfProducts</name>
 					<dataType>HLAinteger32BE</dataType>
 					<semantics>N/A</semantics>
 				</parameter>

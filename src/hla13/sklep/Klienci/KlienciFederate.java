@@ -219,7 +219,7 @@ public class KlienciFederate
 			int producedValue = producer.produce();
 			if(numberOfClientsInQueueA + numberOfClientsInQueueB + producedValue <= maxNumberOfClients ) {
 				ParameterHandleValueMap parameterHandleValueMap = rtiamb.getParameterHandleValueMapFactory().create(1);
-				ParameterHandle addClientsCountHandle = rtiamb.getParameterHandle(addClientsHandle, "numberOfClients");
+				ParameterHandle addClientsCountHandle = rtiamb.getParameterHandle(addClientsHandle, "numberOfProducts");
 				HLAinteger32BE count = encoderFactory.createHLAinteger32BE(producedValue);
 				parameterHandleValueMap.put(addClientsCountHandle, count.toByteArray());
 				rtiamb.sendInteraction(addClientsHandle, parameterHandleValueMap, generateTag());
