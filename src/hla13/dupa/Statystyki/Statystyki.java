@@ -42,7 +42,7 @@ public class Statystyki {
 //    Diagram diagramDlugosciKolejek = new Diagram(Diagram.DiagramType.DISTRIBUTION,"Zmiana długości kolejek");
 //    Diagram diagramZajetosciKolejek = new Diagram(Diagram.DiagramType.DISTRIBUTION,"Zmiana zajętości kolejek");
     Diagram diagramDlugosciKolejek = new Diagram(Diagram.DiagramType.TIME_FUNCTION,"Zmiana długości kolejek");
-    //Diagram diagramZajetosciKolejek = new Diagram(Diagram.DiagramType.TIME_FUNCTION,"Zmiana zajętości kolejek");
+    Diagram diagramZajetosciKolejek = new Diagram(Diagram.DiagramType.TIME_FUNCTION,"Zmiana zajętości kolejek");
     public Statystyki() {
         random = new Random();
         timeToNext = generateTimeToNext();
@@ -132,15 +132,15 @@ public class Statystyki {
         System.out.println("Sredni czas oczekiwania w kolejce B wynosi: "+ sredniCzasOczekiwaniaWKolejceB);
         licznikWykonan++;
         //System.out.println("=============================Licznik wykonan:====================================== "+licznikWykonan);
-        if(licznikWykonan == 30){
+        if(licznikWykonan == 200){
             //System.out.println("===========WSZEDLEM============");
             diagramDlugosciKolejek.add(dlugoscKolejkiA, Color.RED,"Kolejka A");
             diagramDlugosciKolejek.add(dlugoscKolejkiB, Color.GREEN,"Kolejka B");
             diagramDlugosciKolejek.show();
             //licznikWykonan = 0;
-//            diagramZajetosciKolejek.add(czasOczekiwaniaWKolejceA,Color.RED,"Kolejka A");
-//            diagramZajetosciKolejek.add(czasOczekiwaniaWKolejceB,Color.GREEN,"Kolejka B");
-//            diagramZajetosciKolejek.show();
+            diagramZajetosciKolejek.add(czasOczekiwaniaWKolejceA,Color.RED,"Kolejka A");
+            diagramZajetosciKolejek.add(czasOczekiwaniaWKolejceB,Color.GREEN,"Kolejka B");
+            diagramZajetosciKolejek.show();
         }
 
 

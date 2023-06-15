@@ -14,7 +14,7 @@ public class Kasy {
 
     public int consume()
     {
-        timeToNext= generateTimeToNextSlow();
+        timeToNext= generateTimeToNextFast();
         int count = 1;
         System.out.println("Chcę zabrać po jednym kliencie z każdej kolejki. Czas do kolejnej próby pobrania klientów: " + timeToNext);
         return count;

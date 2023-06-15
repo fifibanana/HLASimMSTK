@@ -126,7 +126,7 @@ public class KasyFederate
 		try
 		{
 			URL[] modules = new URL[]{
-			    (new File("foms/KlienciDoKas.xml")).toURI().toURL(),  //Podłączenie do moedelu FOM
+			    (new File("foms/KlienciDoKas.xml")).toURI().toURL(),  //Podłączenie do modelu FOM
 			};
 			
 			rtiamb.createFederationExecution( "ProducerConsumerFederation", modules );//Stworzenie federacji o nazwie...

@@ -279,17 +279,25 @@ public class KolejkaFederateAmbassador extends NullFederateAmbassador
 			{
 				builder.append( "\tCOUNT PARAM!" );
 				byte[] bytes = theParameters.get(federate.numberOfClientsHandle);
+				byte[] bytes2 = theParameters.get(federate.numberOfProductsHandle);
 				HLAinteger32BE count = new HLA1516eInteger32BE();
+				HLAinteger32BE count2 = new HLA1516eInteger32BE();
 				try {
 					count.decode(bytes);
 				} catch (DecoderException e) {
 					e.printStackTrace();
 				}
+				try {
+					count2.decode(bytes2);
+				} catch (DecoderException e) {
+					e.printStackTrace();
+				}
 				int countValue = count.getValue();
+				int countValue2 = count2.getValue();
 				builder.append( "\tcount Value=" + countValue );
 				if( interactionClass.equals(federate.addClientsHandle) )
 				{
-					Kolejka.getInstance().addTo(countValue);
+					Kolejka.getInstance().addTo(countValue, countValue2);
 				}
 //brakuje sekcji poswieconej produktom
 			}

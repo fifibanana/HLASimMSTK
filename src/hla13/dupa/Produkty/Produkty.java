@@ -15,7 +15,7 @@ public class Produkty {
     public int produce()
     {
         timeToNext=generateTimeToNext();
-        int count = random.nextInt(3)+1;
+        int count = random.nextInt(10)+1;
        // int count2 = random.nextInt(2)+1;
        // List listOfCount = new ArrayList<>();
        // listOfCount.add(count);

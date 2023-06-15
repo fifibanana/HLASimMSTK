@@ -65,18 +65,22 @@ public class Kolejka {
         this.maxNumberOfClients = maxNumberOfClients;
     }
 
-    public boolean addTo(int count)
+    public boolean addTo(int count, int noOfProducts)
     {
         if(this.numberOfClietnsInQueueA+numberOfClietnsInQueueB+count<=this.maxNumberOfClients) {
-            if(this.numberOfClietnsInQueueA>=this.numberOfClietnsInQueueB){
-                this.numberOfClietnsInQueueB += count;
-                System.out.println("Kolejka: Dodaję klientów do kolejki B");
+            //if(this.numberOfClietnsInQueueA>=this.numberOfClietnsInQueueB){
+            if(count >= 5){
+                //this.numberOfClietnsInQueueB += count;
+                this.numberOfClietnsInQueueB += 1;
+                System.out.println("Kolejka: Dodaję klienta do kolejki B");
             }
             else{
-                this.numberOfClietnsInQueueA += count;
-                System.out.println("Kolejka: Dodaję klientów do kolejki A");
+                //this.numberOfClietnsInQueueA += count;
+                this.numberOfClietnsInQueueA += 1;
+                System.out.println("Kolejka: Dodaję klienta do kolejki A");
             }
-            System.out.println("Kolejka: Przybyło " + count + " klientów. Aktualna liczba klientów: ");
+            //System.out.println("Kolejka: Przybyło " + count + " klientów. Aktualna liczba klientów: ");
+            System.out.println("Kolejka: Przybył klient. Aktualna liczba klientów: ");
             System.out.println("W kolejce A: " + this.numberOfClietnsInQueueA);
             System.out.println("W kolejce B: " + this.numberOfClietnsInQueueB);
 
@@ -92,11 +96,11 @@ public class Kolejka {
     public boolean addProductsTo(int count)
     {
         if(numberOfProductsForClientA == 0 && zabranoZA == 1){
-            numberOfProductsForClientA = count;
+            numberOfProductsForClientA = count%5 + 1;
             zabranoZA = 0;
         }
         if(numberOfProductsForClientB == 0 && zabranoZB == 1){
-            numberOfProductsForClientB = count;
+            numberOfProductsForClientB = count%5 + 6;
             zabranoZB = 0;
         }
 
