@@ -34,6 +34,9 @@ import java.net.URL;
 
 public class KlienciFederate
 {
+
+	private final double federationTimeLimit = 300;
+
 	/** The sync point all federates will sync up on before starting */
 	public static final String READY_TO_RUN = "ReadyToRun";
 
@@ -72,7 +75,7 @@ public class KlienciFederate
 	 */
 	private void log( String message )
 	{
-		System.out.println( "ProducerFederate   : " + message );
+		System.out.println( "KlienciFederate   : " + message );
 	}
 
 	/**
@@ -119,8 +122,6 @@ public class KlienciFederate
 		// 3. create the federation //
 		//////////////////////////////
 		log( "Creating Federation..." );
-		// We attempt to create a new federation with the first three of the
-		// restaurant FOM modules covering processes, food and drink
 		try
 		{
 			URL[] modules = new URL[]{
@@ -209,13 +210,8 @@ public class KlienciFederate
 		// send an interaction.
 		Klienci producer = new Klienci();
 		//while( fedamb.isRunning )
-		while( fedamb.federateTime < 300 )
+		while( fedamb.federateTime < federationTimeLimit )
 		{
-//            protected int numberOfClientsInQueueA = 0;
-//            protected int numberOfClientsInQueueB = 0;
-//            protected int numberOfProductsForClientA = 0;
-//            protected int numberOfProductsForClientB = 0;
-//            protected int maxNumberOfClients = 0;
 			int producedValue = producer.produce();
 			if(numberOfClientsInQueueA + numberOfClientsInQueueB + producedValue <= maxNumberOfClients ) {
 				ParameterHandleValueMap parameterHandleValueMap = rtiamb.getParameterHandleValueMapFactory().create(1);

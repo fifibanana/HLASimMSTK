@@ -34,6 +34,9 @@ import java.net.URL;
 
 public class ProduktyFederate
 {
+	private final double federationTimeLimit = 300;
+
+
 	/** The sync point all federates will sync up on before starting */
 	public static final String READY_TO_RUN = "ReadyToRun";
 
@@ -209,7 +212,7 @@ public class ProduktyFederate
 		// send an interaction.
 		Produkty producer = new Produkty();
 		//while( fedamb.isRunning )
-		while( fedamb.federateTime < 300 )
+		while( fedamb.federateTime < federationTimeLimit )
 		{
 			//List producedValues = producer.produce();
 			int producedValue = producer.produce();

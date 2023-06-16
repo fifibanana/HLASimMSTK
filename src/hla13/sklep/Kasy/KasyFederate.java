@@ -36,6 +36,9 @@ import java.net.URL;
 
 public class KasyFederate
 {
+	private final double federationTimeLimit = 300;
+
+
 	/** The sync point all federates will sync up on before starting */
 	public static final String READY_TO_RUN = "ReadyToRun";
 
@@ -119,10 +122,9 @@ public class KasyFederate
 
 		//////////////////////////////
 		// 3. create the federation //
-		//////////////////////////////
+		/////////////////////// ///////
 		log( "Creating Federation..." );
-		// We attempt to create a new federation with the first three of the
-		// restaurant FOM modules covering processes, food and drink
+
 		try
 		{
 			URL[] modules = new URL[]{
@@ -210,7 +212,7 @@ public class KasyFederate
 		Kasy consumer = new Kasy();
 
 		//while( fedamb.isRunning )
-		while( fedamb.federateTime < 300 )
+		while( fedamb.federateTime < federationTimeLimit )
 		{
 			int consumed = consumer.consume();
 			//sprawdz czy liczba klientow w kazdej z kas jest minimum rowna 1
@@ -328,11 +330,7 @@ public class KasyFederate
 		// do the publication
 		rtiamb.publishInteractionClass(getClientsHandle);
 //
-////		publish GetProducts interaction
-//		String iname2 = "HLAinteractionRoot.GetProductsForClientA";
-//		getProductsHandle = rtiamb.getInteractionClassHandle( iname );
-//		// do the publication
-//		rtiamb.publishInteractionClass(getProductsHandle);
+
 	}
 	/**
 	 * This method will request a time advance to the current time, plus the given

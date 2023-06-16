@@ -33,6 +33,9 @@ import java.net.URL;
 
 public class KolejkaFederate
 {
+	private final double federationTimeLimit = 300;
+
+
 	//----------------------------------------------------------
 	//                    STATIC VARIABLES
 	//----------------------------------------------------------
@@ -78,7 +81,7 @@ public class KolejkaFederate
 	 */
 	private void log( String message )
 	{
-		System.out.println( "StorageFederate   : " + message );
+		System.out.println( "KolejkaFederate   : " + message );
 	}
 
 	/**
@@ -221,7 +224,7 @@ public class KolejkaFederate
 		// update the attribute values of the object we registered, and will
 		// send an interaction.
 		//while( fedamb.isRunning )
-		while( fedamb.federateTime < 300 )
+		while( fedamb.federateTime < federationTimeLimit )
 		{
 			// update QueueInfo parameters to current values
 			AttributeHandleValueMap attributes = rtiamb.getAttributeHandleValueMapFactory().create(2);
@@ -229,16 +232,16 @@ public class KolejkaFederate
 			HLAinteger32BE maxNumberOfClients = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getMaxNumberOfClients());
 			attributes.put( queueMaxNumberOfClientsHandle, maxNumberOfClients.toByteArray() );
 
-			HLAinteger32BE numberOfClientsInQueueA = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfClietnsInQueueA() );
+			HLAinteger32BE numberOfClientsInQueueA = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfClietnsInQueueFast() );
 			attributes.put( queueInfoNumberOfClientsInQueueAHandle, numberOfClientsInQueueA.toByteArray() );
 
-			HLAinteger32BE numberOfClientsInQueueB = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfClietnsInQueueB() );
+			HLAinteger32BE numberOfClientsInQueueB = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfClietnsInQueueSlow() );
 			attributes.put( queueInfoNumberOfClientsInQueueBHandle, numberOfClientsInQueueB.toByteArray() );
 
-			HLAinteger32BE numberOfProductsInQueueA = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfProductsForClientA() );
+			HLAinteger32BE numberOfProductsInQueueA = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfProductsForClientFast() );
 			attributes.put( queueNumberOfProductsForClientAHandle, numberOfProductsInQueueA.toByteArray() );
 
-			HLAinteger32BE numberOfProductsInQueueB = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfProductsForClientB() );
+			HLAinteger32BE numberOfProductsInQueueB = encoderFactory.createHLAinteger32BE( Kolejka.getInstance().getNumberOfProductsForClientSlow() );
 			attributes.put( queueNumberOfProductsForClientBHandle, numberOfProductsInQueueB.toByteArray() );
 
 			rtiamb.updateAttributeValues( objectHandle, attributes, generateTag() );

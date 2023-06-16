@@ -20,6 +20,9 @@ import java.net.URL;
 
 public class StatystykiFederate
 {
+
+    private final double federationTimeLimit = 300;
+
     /** The sync point all federates will sync up on before starting */
     public static final String READY_TO_RUN = "ReadyToRun";
 
@@ -193,7 +196,7 @@ public class StatystykiFederate
         /////////////////////////////////////
         //Statystyki stats = new Statystyki();
         //while( fedamb.isRunning )
-        while( fedamb.federateTime < 300 )
+        while( fedamb.federateTime < federationTimeLimit )
         {
 
             //tutaj można wykonywać jakąś metodę z klasy Statystyki

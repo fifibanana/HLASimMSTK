@@ -9,138 +9,116 @@ import java.util.Random;
 public class Statystyki {
     int timeToNext;
     private Random random;
-    double sredniaDlugoscKolejkiDlaA = 0.0;
-    double sredniaDlugoscKolejkiDlaB = 0.0;
+    double sredniaDlugoscKolejkiDlaKasSzybkich = 0.0;
+    double sredniaDlugoscKolejkiDlaKasWolnych = 0.0;
 
-    int lacznaLiczbaKlientowWKolejceA = 0;
-    int lacznaLiczbaKlientowWKolejceB = 0;
+    int sumOfClientsInFastQ = 0;
+    int sumOfClientsInSlowQ = 0;
 
-    int iloscZmianDlugosciDlaA = 0;
-    int iloscZmianDlugosciDlaB = 0;
+    int fastQLengthChanges = 0;
 
-    int ostatniaOdnotowanaLiczbaKlienctowWKolejceA = 0;
-    int ostatniaOdnotowanaLiczbaKlienctowWKolejceB = 0;
+    int slowQLengthChanges = 0;
 
-    int liczbaObsluzonychWkolejceA = 0;
-    int liczbaObsluzonychWkolejceB = 0;
+    int ostatniaOdnotowanaLiczbaKlienctowWKolejceFast = 0;
+    int ostatniaOdnotowanaLiczbaKlienctowWKolejceSlow = 0;
 
-    int lacznyCzasOczekiwaniaWkolejceA = 0;
-    int lacznyCzasOczekiwaniaWkolejceB = 0;
+    int liczbaObsluzonychWkolejceFast = 0;
+    int liczbaObsluzonychWkolejceSlow = 0;
 
-    int dodanoCzasDoA = 0;
-    int dodanoCzasDoB = 0;
+    int lacznyCzasOczekiwaniaWkolejceFast = 0;
+    int lacznyCzasOczekiwaniaWkolejceSlow = 0;
 
-    double sredniCzasOczekiwaniaWKolejceA = 0.0;
-    double sredniCzasOczekiwaniaWKolejceB = 0.0;
+    int timeAddedFastQ = 0;
+    int timeAddedSlowQ = 0;
+
+    double sredniCzasOczekiwaniaWKolejceFast = 0.0;
+    double sredniCzasOczekiwaniaWKolejceSlow = 0.0;
 
     int licznikWykonan = 0;
     double licznikWykonanDouble = 0.0;
-    MonitoredVar dlugoscKolejkiA = new MonitoredVar();
-    MonitoredVar czasOczekiwaniaWKolejceA = new MonitoredVar();
-    MonitoredVar dlugoscKolejkiB = new MonitoredVar();
-    MonitoredVar czasOczekiwaniaWKolejceB = new MonitoredVar();
-//    Diagram diagramDlugosciKolejek = new Diagram(Diagram.DiagramType.DISTRIBUTION,"Zmiana długości kolejek");
-//    Diagram diagramZajetosciKolejek = new Diagram(Diagram.DiagramType.DISTRIBUTION,"Zmiana zajętości kolejek");
+    MonitoredVar dlugoscKolejkiFast = new MonitoredVar();
+    MonitoredVar czasOczekiwaniaWKolejceFast = new MonitoredVar();
+    MonitoredVar dlugoscKolejkiSlow = new MonitoredVar();
+    MonitoredVar czasOczekiwaniaWKolejceSlow = new MonitoredVar();
+
     Diagram diagramDlugosciKolejek = new Diagram(Diagram.DiagramType.TIME_FUNCTION,"Zmiana długości kolejek");
-    Diagram diagramZajetosciKolejek = new Diagram(Diagram.DiagramType.TIME_FUNCTION,"Zmiana zajętości kolejek");
+    Diagram diagramCzasuOczekiwan = new Diagram(Diagram.DiagramType.TIME_FUNCTION,"Zmiana czasu oczekiwania w kolejce");
     public Statystyki() {
         random = new Random();
         timeToNext = generateTimeToNext();
-
-
     }
 
-    public int consume()
-    {
-        timeToNext=generateTimeToNext();
-        int count = 1;
-        System.out.println("Chcę zabrać po jednym kliencie z każdej kolejki. Czas do kolejnej próby pobrania klientów: " + timeToNext);
-        return count;
-    }
 
-    public void wypiszStatystyki(int numberOfClientsInA,int numberOfClientsInB, int numberOfProductsInA, int numberOfProductsInB){
+    public void wypiszStatystyki(int numberOfClientsInFast,int numberOfClientsInSlow, int numberOfProductsInSlow, int numberOfProductsInFast){
         licznikWykonanDouble += 1.0;
-        dlugoscKolejkiA.setValue(numberOfClientsInA,licznikWykonanDouble);
-        dlugoscKolejkiB.setValue(numberOfClientsInB,licznikWykonanDouble);
+        dlugoscKolejkiFast.setValue(numberOfClientsInFast,licznikWykonanDouble);
+        dlugoscKolejkiSlow.setValue(numberOfClientsInSlow,licznikWykonanDouble);
 
-        if(numberOfClientsInA != ostatniaOdnotowanaLiczbaKlienctowWKolejceA){
-            if(numberOfClientsInA<ostatniaOdnotowanaLiczbaKlienctowWKolejceA){
-                liczbaObsluzonychWkolejceA++;
+        if(numberOfClientsInFast != ostatniaOdnotowanaLiczbaKlienctowWKolejceFast){
+            if(numberOfClientsInFast< ostatniaOdnotowanaLiczbaKlienctowWKolejceFast){
+                liczbaObsluzonychWkolejceFast++;
             }
-            iloscZmianDlugosciDlaA++;
+            fastQLengthChanges++;
 
-            lacznaLiczbaKlientowWKolejceA += numberOfClientsInA;
-            ostatniaOdnotowanaLiczbaKlienctowWKolejceA = numberOfClientsInA;
+            sumOfClientsInFastQ += numberOfClientsInFast;
+            ostatniaOdnotowanaLiczbaKlienctowWKolejceFast = numberOfClientsInFast;
         }
-        if(numberOfClientsInB != ostatniaOdnotowanaLiczbaKlienctowWKolejceB){
-            if(numberOfClientsInB<ostatniaOdnotowanaLiczbaKlienctowWKolejceB){
-                liczbaObsluzonychWkolejceB++;
+        if(numberOfClientsInSlow != ostatniaOdnotowanaLiczbaKlienctowWKolejceSlow){
+            if(numberOfClientsInSlow< ostatniaOdnotowanaLiczbaKlienctowWKolejceSlow){
+                liczbaObsluzonychWkolejceSlow++;
             }
-            iloscZmianDlugosciDlaB++;
+            slowQLengthChanges++;
 
-            lacznaLiczbaKlientowWKolejceB += numberOfClientsInB;
-            ostatniaOdnotowanaLiczbaKlienctowWKolejceB = numberOfClientsInB;
+            sumOfClientsInSlowQ += numberOfClientsInSlow;
+            ostatniaOdnotowanaLiczbaKlienctowWKolejceSlow = numberOfClientsInSlow;
         }
-        System.out.println("Liczba klientów w kolejce A: "+ numberOfClientsInA);
-        System.out.println("Liczba klientów w kolejce B: "+ numberOfClientsInB);
-        if(iloscZmianDlugosciDlaA!=0){
-            sredniaDlugoscKolejkiDlaA = lacznaLiczbaKlientowWKolejceA*1.0/iloscZmianDlugosciDlaA;
+        System.out.println("Liczba klientów w kolejce Fast: "+ numberOfClientsInFast);
+        System.out.println("Liczba klientów w kolejce Slow: "+ numberOfClientsInSlow);
+        if(fastQLengthChanges !=0){
+            sredniaDlugoscKolejkiDlaKasSzybkich = sumOfClientsInFastQ *1.0/ fastQLengthChanges;
         }
-        if(iloscZmianDlugosciDlaB!=0){
-            sredniaDlugoscKolejkiDlaB = lacznaLiczbaKlientowWKolejceB*1.0/iloscZmianDlugosciDlaB;
+        if(slowQLengthChanges !=0){
+            sredniaDlugoscKolejkiDlaKasWolnych = sumOfClientsInSlowQ *1.0/ slowQLengthChanges;
         }
-        System.out.println("Srednia liczba klientów w kolejce A: "+ sredniaDlugoscKolejkiDlaA);
-        System.out.println("Srednia liczba klientów w kolejce B: "+ sredniaDlugoscKolejkiDlaB);
+        System.out.println("Srednia liczba klientów w kolejce kasy Fast: "+ sredniaDlugoscKolejkiDlaKasSzybkich);
+        System.out.println("Srednia liczba klientów w kolejce kasy Slow: "+ sredniaDlugoscKolejkiDlaKasWolnych);
 
-        if(liczbaObsluzonychWkolejceA>liczbaObsluzonychWkolejceB){
-            System.out.println("Więcej klientów obsłużono w kolejce A");
-        }
-        else if(liczbaObsluzonychWkolejceA<liczbaObsluzonychWkolejceB){
-            System.out.println("Więcej klientów obsłużono w kolejce B");
-        }
-        else{
-            System.out.println("W obu kolejkach obsłużono tyle samo klientów");
-        }
-//        System.out.println("liczbaObsluzonychWkolejceA : "+ liczbaObsluzonychWkolejceA);
-//        System.out.println("licznikWykonan : " + licznikWykonan);
-//        System.out.println("numberOfProductsInA : "+ numberOfProductsInA );
-//        System.out.println("dodanoCzasDoA : "+ dodanoCzasDoA);
-//        System.out.println("lacznyCzasOczekiwaniaWkolejceA : "+lacznyCzasOczekiwaniaWkolejceA);
 
-        if(numberOfProductsInA>0&&dodanoCzasDoA==0){
-            lacznyCzasOczekiwaniaWkolejceA +=numberOfProductsInA;
-            czasOczekiwaniaWKolejceA.setValue(numberOfProductsInA,licznikWykonanDouble);
-            dodanoCzasDoA = 1;
-        }
-        else if(numberOfProductsInA == 0){
-            dodanoCzasDoA = 0;
-        }
-        if(numberOfProductsInB>0&&dodanoCzasDoB==0){
-            lacznyCzasOczekiwaniaWkolejceB +=numberOfProductsInB;
-            czasOczekiwaniaWKolejceB.setValue(numberOfProductsInB,licznikWykonanDouble);
-            dodanoCzasDoB = 1;
-        }
-        else if(numberOfProductsInB == 0){
-            dodanoCzasDoB = 0;
-        }
-        if(liczbaObsluzonychWkolejceA!=0)
-            sredniCzasOczekiwaniaWKolejceA = lacznyCzasOczekiwaniaWkolejceA * 1.0 / liczbaObsluzonychWkolejceA;
-        if(liczbaObsluzonychWkolejceB!=0)
-            sredniCzasOczekiwaniaWKolejceB = lacznyCzasOczekiwaniaWkolejceB * 1.0 / liczbaObsluzonychWkolejceB;
 
-        System.out.println("Sredni czas oczekiwania w kolejce A wynosi: "+ sredniCzasOczekiwaniaWKolejceA);
-        System.out.println("Sredni czas oczekiwania w kolejce B wynosi: "+ sredniCzasOczekiwaniaWKolejceB);
+        if(numberOfProductsInSlow>0&& timeAddedFastQ ==0){
+            lacznyCzasOczekiwaniaWkolejceFast +=numberOfProductsInSlow;
+            czasOczekiwaniaWKolejceFast.setValue(numberOfProductsInSlow,licznikWykonanDouble);
+            timeAddedFastQ = 1;
+        }
+        else if(numberOfProductsInSlow == 0){
+            timeAddedFastQ = 0;
+        }
+        if(numberOfProductsInFast>0&& timeAddedSlowQ ==0){
+            lacznyCzasOczekiwaniaWkolejceSlow +=numberOfProductsInFast;
+            czasOczekiwaniaWKolejceSlow.setValue(numberOfProductsInFast,licznikWykonanDouble);
+            timeAddedSlowQ = 1;
+        }
+        else if(numberOfProductsInFast == 0){
+            timeAddedSlowQ = 0;
+        }
+        if(liczbaObsluzonychWkolejceFast !=0)
+            sredniCzasOczekiwaniaWKolejceFast = lacznyCzasOczekiwaniaWkolejceFast * 1.0 / liczbaObsluzonychWkolejceFast;
+        if(liczbaObsluzonychWkolejceSlow !=0)
+            sredniCzasOczekiwaniaWKolejceSlow = lacznyCzasOczekiwaniaWkolejceSlow * 1.0 / liczbaObsluzonychWkolejceSlow;
+
+        System.out.println("Sredni czas oczekiwania w kolejce fast wynosi: "+ sredniCzasOczekiwaniaWKolejceFast);
+        System.out.println("Sredni czas oczekiwania w kolejce slow wynosi: "+ sredniCzasOczekiwaniaWKolejceSlow);
         licznikWykonan++;
         //System.out.println("=============================Licznik wykonan:====================================== "+licznikWykonan);
         if(licznikWykonan == 200){
             //System.out.println("===========WSZEDLEM============");
-            diagramDlugosciKolejek.add(dlugoscKolejkiA, Color.RED,"Kolejka A");
-            diagramDlugosciKolejek.add(dlugoscKolejkiB, Color.GREEN,"Kolejka B");
+            diagramDlugosciKolejek.add(dlugoscKolejkiFast, Color.RED,"Kolejka Fast");
+            diagramDlugosciKolejek.add(dlugoscKolejkiSlow, Color.GREEN,"Kolejka Slow");
             diagramDlugosciKolejek.show();
             //licznikWykonan = 0;
-            diagramZajetosciKolejek.add(czasOczekiwaniaWKolejceA,Color.RED,"Kolejka A");
-            diagramZajetosciKolejek.add(czasOczekiwaniaWKolejceB,Color.GREEN,"Kolejka B");
-            diagramZajetosciKolejek.show();
+            diagramCzasuOczekiwan.add(czasOczekiwaniaWKolejceFast,Color.RED,"Kolejka Fast");
+            diagramCzasuOczekiwan.add(czasOczekiwaniaWKolejceSlow,Color.GREEN,"Kolejka Slow");
+            diagramCzasuOczekiwan.show();
         }
 
 

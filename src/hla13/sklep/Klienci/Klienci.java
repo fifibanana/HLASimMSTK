@@ -10,6 +10,12 @@ public class Klienci {
     private Random random;
     private SimGenerator generator;
 
+
+    // Poisson distribution parameter to regulate percent of client buying under 5 products
+    // at a = 3.5 about 60% clients purchase under 5 products
+    private double n = 3.5;
+
+
     public Klienci() {
         random = new Random();
         timeToNext = generateTimeToNext();
@@ -20,9 +26,7 @@ public class Klienci {
     {
         timeToNext=generateTimeToNext();
         // liczba produktów
-        int count = (int) generator.poisson(3.5);
-        //int count = random.nextInt(10)+1;
-        //System.out.println("Do kas przybyło " + count + " klientów. Kolejni klienci przybędą za: " + timeToNext);
+        int count = (int) generator.poisson(n);
         System.out.println("Do kasy przybył klient! Kolejny klient przybędzie za: " + timeToNext);
         return count;
     }

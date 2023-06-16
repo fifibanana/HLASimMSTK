@@ -185,7 +185,7 @@ public class KasyFederateAmbassador extends NullFederateAmbassador
 			// print the attibute handle
 			builder.append( "\tattributeHandle=" );
 
-			// if we're dealing with Flavor, decode into the appropriate enum value
+
 
 
 			if( attributeHandle.equals(federate.queueInfoNumberOfClientsInFastQueueHandle) )
@@ -216,34 +216,6 @@ public class KasyFederateAmbassador extends NullFederateAmbassador
 				builder.append( max.getValue() );
 				federate.queueInfoNumberOfClientsInFastQueue = max.getValue();
 			}
-//			else if( attributeHandle.equals(federate.queueNumberOfProductsForClientAHandle ) )
-//			{
-//				builder.append( attributeHandle );
-//				builder.append( " (Max)" );
-//				builder.append( ", attributeValue=" );
-//				HLAinteger32BE max = new HLA1516eInteger32BE();
-//				try {
-//					max.decode(theAttributes.get(attributeHandle));
-//				} catch (DecoderException e) {
-//					e.printStackTrace();
-//				}
-//				builder.append( max.getValue() );
-//				federate.queueNumberOfProductsForClientA  = max.getValue();
-//			}
-//			else if( attributeHandle.equals(federate.queueNumberOfProductsForClientBHandle) )
-//			{
-//				builder.append( attributeHandle );
-//				builder.append( " (Max)" );
-//				builder.append( ", attributeValue=" );
-//				HLAinteger32BE max = new HLA1516eInteger32BE();
-//				try {
-//					max.decode(theAttributes.get(attributeHandle));
-//				} catch (DecoderException e) {
-//					e.printStackTrace();
-//				}
-//				builder.append( max.getValue() );
-//				federate.queueNumberOfProductsForClientB= max.getValue();
-//			}
 			else if( attributeHandle.equals(federate.queueMaxNumberOfClientsHandle) )
 			{
 				builder.append( attributeHandle );
