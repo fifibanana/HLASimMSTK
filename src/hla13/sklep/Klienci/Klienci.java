@@ -14,6 +14,8 @@ public class Klienci {
     // Poisson distribution parameter to regulate percent of client buying under 5 products
     // at a = 3.5 about 60% clients purchase under 5 products
     private double n = 3.5;
+    // czas przybycia klienta z zakresu 2-10
+    private int timeToNextClient = 8 ;
 
 
     public Klienci() {
@@ -37,6 +39,7 @@ public class Klienci {
 
     private int generateTimeToNext()
     {
-        return random.nextInt(8)+3;
+
+        return random.nextInt(timeToNextClient)+3;
     }
 }

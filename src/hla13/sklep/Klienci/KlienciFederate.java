@@ -336,8 +336,7 @@ public class KlienciFederate
 		HLAfloat64Time time = timeFactory.makeTime( fedamb.federateTime + timestep );
 		rtiamb.timeAdvanceRequest( time );
 
-		// wait for the time advance to be granted. ticking will tell the
-		// LRC to start delivering callbacks to the federate
+
 		while( fedamb.isAdvancing )
 		{
 			rtiamb.evokeMultipleCallbacks( 0.1, 0.2 );
@@ -359,7 +358,7 @@ public class KlienciFederate
 	//----------------------------------------------------------
 	public static void main( String[] args )
 	{
-		// get a federate name, use "exampleFederate" as default
+
 		String federateName = "Klienci";
 		if( args.length != 0 )
 		{
@@ -368,12 +367,13 @@ public class KlienciFederate
 
 		try
 		{
-			// run the example federate
+
 			new KlienciFederate().runFederate( federateName );
+
 		}
 		catch( Exception rtie )
 		{
-			// an exception occurred, just log the information and exit
+
 			rtie.printStackTrace();
 		}
 	}

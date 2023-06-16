@@ -324,7 +324,7 @@ public class KasyFederate
 		rtiamb.subscribeObjectClassAttributes(queueInfoHandle, attributes);
 
 
-//		publish GetClients interaction
+
 		String iname = "HLAinteractionRoot.GetClients";
 		getClientsHandle = rtiamb.getInteractionClassHandle( iname );
 		// do the publication

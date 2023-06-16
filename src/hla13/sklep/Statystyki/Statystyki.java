@@ -7,6 +7,9 @@ import java.awt.*;
 import java.util.Random;
 
 public class Statystyki {
+
+
+    private final double federationTimeLimit = 300;
     int timeToNext;
     private Random random;
     double sredniaDlugoscKolejkiDlaKasSzybkich = 0.0;
@@ -109,16 +112,18 @@ public class Statystyki {
         System.out.println("Sredni czas oczekiwania w kolejce fast wynosi: "+ sredniCzasOczekiwaniaWKolejceFast);
         System.out.println("Sredni czas oczekiwania w kolejce slow wynosi: "+ sredniCzasOczekiwaniaWKolejceSlow);
         licznikWykonan++;
-        //System.out.println("=============================Licznik wykonan:====================================== "+licznikWykonan);
-        if(licznikWykonan == 200){
-            //System.out.println("===========WSZEDLEM============");
+
+        //DIAGRAMY
+
+        if(licznikWykonan == federationTimeLimit){
+
             diagramDlugosciKolejek.add(dlugoscKolejkiFast, Color.RED,"Kolejka Fast");
             diagramDlugosciKolejek.add(dlugoscKolejkiSlow, Color.GREEN,"Kolejka Slow");
             diagramDlugosciKolejek.show();
-            //licznikWykonan = 0;
             diagramCzasuOczekiwan.add(czasOczekiwaniaWKolejceFast,Color.RED,"Kolejka Fast");
             diagramCzasuOczekiwan.add(czasOczekiwaniaWKolejceSlow,Color.GREEN,"Kolejka Slow");
             diagramCzasuOczekiwan.show();
+
         }
 
 

@@ -27,11 +27,6 @@ public class Kasy {
         return timeToNext;
     }
 
-    //not used
-//    private int generateTimeToNextSlow()
-//    {
-//        return (random.nextInt(5)+1);
-//    }
 
 
     private int generateTimeToNext()

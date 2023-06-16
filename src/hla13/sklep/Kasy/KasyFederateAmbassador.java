@@ -140,9 +140,7 @@ public class KasyFederateAmbassador extends NullFederateAmbassador
 	                                    SupplementalReflectInfo reflectInfo )
 	    throws FederateInternalError
 	{
-			// just pass it on to the other method for printing purposes
-			// passing null as the time will let the other method know it
-			// it from us, not from the RTI
+
 			reflectAttributeValues( theObject,
 			                        theAttributes,
 			                        tag,
