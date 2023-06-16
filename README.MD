@@ -15,18 +15,38 @@ Zaproponować taką liczbę kas, żeby kolejka nie przekroczyła zadanej długo�
     - Kolejki
     - Klienci
     - Produkty
-2. Na początku klas federatów istnieje możliwość regulacji parametrów symulacji:
+
+2. Wykorzystane interakcje:
+    - AddClients
+      - numberOfProducts
+    - GetClients
+      - count
+    - AddProductsForClient
+      - NumberOfProducts
+
+3. Wykorzystany obiekt FOM
+    - QueueInfo
+      - numberOfClientsInQueueA
+      - numberOfClientsInQueueB
+      - numberOfProductsForClientA
+      - numberOfProductsForClientB
+      - maxNumberOfClients
+
+4. Na początku klas federatów istnieje możliwość regulacji parametrów symulacji:
     - private final double federationTimeLimit = 300; regulacja długości trwania symulacji
     - W klasie kolejka:
          - private int maxQLength = 20 - regulacja maksymalnej długości kolejki L
     - W klasie klienci:
       - // Poisson distribution parameter to regulate percent of client buying under 5 products
-      // at a = 3.5 about 60% clients purchase under 5 products
-      private double n = 3.5;
-      // czas przybycia klienta z zakresu 2-10
-      private int timeToNextClient = 8 ;
+      - // at a = 3.5 about 60% clients purchase under 5 products
+      - private double n = 3.5;
+      - // czas przybycia klienta z zakresu 2-10
+      - private int timeToNextClient = 8 ;
     - W klasie produkty:
       - // Poisson distribution parameter to regulate percent of client buying under 5 products
-      // at a = 3.5 about 60% clients purchase under 5 products
-      private double n = 3.5;
-    
+      - // at a = 3.5 about 60% clients purchase under 5 products
+      - private double n = 3.5;
+
+Podsumowanie:
+Przy zadanych parametrach symulacji, do obsługi klientów wystarczająca jest jedna kasa ekspresowa oraz jedna kasa zwykła.
+Kolejka do kas ekspresowych rzadko przekracza 2 osoby. Kolejka do kasy zwykłej również jest krótka, jednak w kasie zwykłej klienci zdecydowanie dłużej czekają na obsługę, niż w kasie ekspresowej.
